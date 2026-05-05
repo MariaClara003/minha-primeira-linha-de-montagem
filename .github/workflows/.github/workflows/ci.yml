@@ -1,0 +1,33 @@
+name: Linha de Montagem CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Pegar o código-fonte
+      - name: 1. Pegar o chassi do carro (código-fonte)
+        uses: actions/checkout@v3
+
+      # 1.5 Criar o produto final
+      - name: 1.5. Fabricar o produto
+        run: echo "Este é o nosso produto final!" > produto.txt
+
+      # 2. Build (simulação)
+      - name: 2. Estação de Build (Montagem)
+        run: echo "Montando o produto..."
+
+      # 3. Teste
+      - name: 3. Estação de Teste (Controle de Qualidade)
+        run: echo "Rodando os testes automatizados... Verificando se a porta abre e fecha!"
+
+      # 4. Salvar artefato
+      - name: 4. Empacotar o produto final (Artefato)
+        uses: actions/upload-artifact@v3
+        with:
+          name: pacote-do-produto
+          path: produto.txt
